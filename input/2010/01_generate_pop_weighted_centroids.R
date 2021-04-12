@@ -4,6 +4,7 @@ library(tidyverse)
 library(sf)
 library(purrr)
 options(tigris_use_cache = TRUE)
+states <- unique(fips_codes$state_code)[1:51]
 
 # Load census block centroids from file
 blocks <- readr::read_csv(
@@ -78,4 +79,4 @@ tract_geometries_check <- tract_geometries %>%
 
 # Save tracts to file
 tract_geometries_check %>%
-  readr::write_csv("input/2010/tracts/tract_pop_wtd_centroids.csv", na = "")
+  readr::write_csv("input/2010/tract_resources/tract_pop_wtd_centroids.csv", na = "")
