@@ -3,9 +3,7 @@ library(tidycensus)
 library(tidyverse)
 library(sf)
 library(purrr)
-library(ggplot2)
 options(tigris_use_cache = TRUE)
-states <- unique(fips_codes$state)[1:51]
 
 # Load census block centroids from file
 blocks <- readr::read_csv(
@@ -68,13 +66,13 @@ tract_geometries_check <- tract_geometries %>%
     ),
     tract_contains_centroid = !is.na(tract_contains_centroid == row_number())
   ) %>%
-  mutate(tract_unroutable = !tract_contains_centroid & (estimate == 0)) %>%
+  mutate(unroutable = !tract_contains_centroid & (estimate == 0)) %>%
   select(
     id = GEOID,
     acs_pop = estimate, acs_moe = moe,
     block_pop = pop_total,
-    pop_wtd_lon, pop_wtd_lat,
-    tract_unroutable
+    lon = pop_wtd_lon, lat = pop_wtd_lat,
+    unroutable
   ) %>%
   st_set_geometry(NULL)
 
