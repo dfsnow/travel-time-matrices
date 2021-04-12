@@ -79,4 +79,4 @@ tract_geometries_check <- tract_geometries %>%
 
 # Save tracts to file
 tract_geometries_check %>%
-  readr::write_csv("input/2010/tract_resources/tract_pop_wtd_centroids.csv", na = "")
+  readr::write_csv("input/2010/tract_pop_wtd_centroids.csv", na = "")
