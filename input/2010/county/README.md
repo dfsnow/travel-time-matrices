@@ -1,6 +1,6 @@
 ## Files
 
-#### `county/buffers.tar.gz`
+### `buffers.tar.gz`
 
 Tarball of buffered 2010 county boundaries saved as GeoJSONs. Two buffer sizes are included:
 
@@ -9,7 +9,7 @@ Tarball of buffered 2010 county boundaries saved as GeoJSONs. Two buffer sizes a
 
 The street clipping buffer should be larger than the destination-finding buffer to ensure that destinations don't end up on street network islands created by the buffer clipping.
 
-#### `county/geoid_list.txt`
+### `geoid_list.txt`
 
 Headerless text list of all 2010 county GEOIDs in the United States. Does not include territories, PR, etc. Sourced from TIGER/Line files (via the [tigris R package](https://cran.r-project.org/web/packages/tigris/index.html)).
 

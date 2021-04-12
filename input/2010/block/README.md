@@ -1,6 +1,6 @@
 ## Files
 
-#### `block/lat_lon_pop.csv.bz2`
+### `lat_lon_pop.csv.bz2`
 
 Census block lat, lon, and population count. Sourced from the [Census FTP site](ftp://ftp.census.gov/geo/tiger/) and combined with CLI utilities. Used to calculate population-weighted centroids for different geographies.
 
