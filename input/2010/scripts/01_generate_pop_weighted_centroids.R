@@ -8,7 +8,7 @@ states <- unique(fips_codes$state_code)[1:51]
 
 # Load census block centroids from file
 blocks <- readr::read_csv(
-  file = "input/2010/block_locs_and_pops.csv.bz2",
+  file = "input/2010/block/lat_lon_pop.csv.bz2",
   col_types = c("id" = "c", "pop" = "i", "lon" = "n", "lat" = "n")
 )
 
@@ -79,4 +79,4 @@ tract_geometries_check <- tract_geometries %>%
 
 # Save tracts to file
 tract_geometries_check %>%
-  readr::write_csv("input/2010/tract_pop_wtd_centroids.csv", na = "")
+  readr::write_csv("input/2010/tract/pop_wtd_centroids.csv.bz2", na = "")
