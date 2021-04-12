@@ -19,13 +19,13 @@ fi
 # Create a clipped PBF of the buffered county in the shared dir, then symlink
 # it to geography-specific dirs
 for county in $(cat county/geoid_list.txt); do
-    if [ ! -f "$PWD"/shared/"$county".pbf ]; then
-        echo "Creating a clipped PBF of OSM ways for '$county' county buffer..."
-        clipping_poly="county/buffers/'$county'_'$buffer_size'.geojson"
-        osmium extract -p "$clipping_poly" \
-            "$PWD"/shared/"$osm_file" \
-            --overwrite --progress \
-            -o "$PWD"/shared/"$county".pbf
-    fi
+    # if [ ! -f "$PWD"/shared/"$county".pbf ]; then
+        # echo "Creating a clipped PBF of OSM ways for '$county' county buffer..."
+        # clipping_poly="county/buffers/'$county'_'$buffer_size'.geojson"
+        # osmium extract -p "$clipping_poly" \
+            # "$PWD"/shared/"$osm_file" \
+            # --overwrite --progress \
+            # -o "$PWD"/shared/"$county".pbf
+    # fi
 done
 
