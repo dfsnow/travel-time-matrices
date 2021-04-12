@@ -1,6 +1,6 @@
 library(tigris)
 library(tidycensus)
-library(tidyverse)
+library(dplyr)
 library(sf)
 library(purrr)
 options(tigris_use_cache = TRUE)
