@@ -19,7 +19,3 @@ Script to generate the GeoJSON buffer files saved in `../county/buffers.tar.gz`.
 ### `03_create_origin_destination_files.R`
 
 Script to generate origin and destination CSV files with `id,lat,lon` needed for routing. Files are partitioned by county and saved to their respective geography's `resources/` directory. `origins.csv` contains all geographic units whose population-weighted centroids lie within the county itself. `destinations.csv` contains all geographic units whose population-weighted centroids lie within the county's 100 km buffer.
-
-### `04_get_transit_feeds.R`
-
-Script to fetch GTFS feeds from the [OpenMobilityData API](https://transitfeeds.com/api/). 

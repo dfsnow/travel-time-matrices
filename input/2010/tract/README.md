@@ -28,22 +28,3 @@ resources/
 ...
 ```
 
-After running `../get_resources.sh`, the same folder will look something like: 
-
-```bash
-resources/
-├── 17031/
-│   ├── 17031.osm.pbf
-│   ├── cta.zip
-│   ├── metra.zip
-│   ├── origins.csv 
-│   └── destinations.csv
-├── 17037/
-│   ├── 17037.osm.pbf
-│   ├── metra.zip
-│   ├── origins.csv 
-│   └── destinations.csv
-├── 17039/
-...
-```
-
