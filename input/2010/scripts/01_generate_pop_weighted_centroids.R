@@ -20,8 +20,7 @@ blocks <- blocks %>%
   mutate(
     x = st_coordinates(.)[,1],
     y = st_coordinates(.)[,2]
-  ) %>%
-  st_set_geometry(NULL)
+  )
 
 
 
@@ -32,6 +31,7 @@ blocks <- blocks %>%
 # + 1 offset for weighted mean because some tracts have only blocks with
 # zero population
 tract_centroids <- blocks %>%
+  st_set_geometry(NULL) %>%
   group_by(tract_id) %>%
   summarize(
     pop_wtd_x = weighted.mean(x, pop + 1),
@@ -79,4 +79,60 @@ tract_geometries_check <- tract_geometries %>%
 
 # Save tracts to file
 tract_geometries_check %>%
-  readr::write_csv("input/2010/tract/pop_wtd_centroids.csv.bz2", na = "")
+  readr::write_csv("input/2010/tract/pop_wtd_centroids.csv", na = "")
+
+
+
+##### ZCTAs #####
+
+# Download all ZCTA geometries from the 2010 census
+zcta_geometries <- zctas(cb = TRUE, year = 2010) %>%
+  select(zcta_id = ZCTA5) %>%
+  st_transform(2163)
+
+# Find all census blocks within each ZCTA, then summarize to get pop-weighted
+# centroids
+# Also remove 00 zips (these are for PR)
+zcta_joined <- zcta_geometries %>%
+  st_join(blocks, join = st_contains) %>%
+  st_set_geometry(NULL)
+
+zcta_centroids <- zcta_joined %>%
+  group_by(zcta_id) %>%
+  summarize(
+    pop_wtd_x = weighted.mean(x, pop + 1),
+    pop_wtd_y = weighted.mean(y, pop + 1),
+    pop_total = sum(pop)
+  ) %>%
+  st_as_sf(coords = c("pop_wtd_x", "pop_wtd_y"), crs = 2163) %>%
+  st_transform(4326) %>%
+  mutate(
+    pop_wtd_lon = st_coordinates(.)[,1],
+    pop_wtd_lat = st_coordinates(.)[,2]
+  ) %>%
+  st_set_geometry(NULL) %>%
+  ungroup()
+
+# Check if pop. weighted ZCTA centroid is inside ZCTA polygon
+zcta_geometries_check <- zcta_geometries %>%
+  left_join(zcta_centroids, by = c("zcta_id")) %>%
+  mutate(
+    zcta_contains_centroid = as.numeric(st_contains(
+      .,
+      st_as_sf(., coords = c("pop_wtd_lon", "pop_wtd_lat"), crs = 4326))
+    ),
+    zcta_contains_centroid = !is.na(zcta_contains_centroid == row_number())
+  ) %>%
+  mutate(unroutable = !zcta_contains_centroid) %>%
+  select(
+    id = zcta_id,
+    block_pop = pop_total,
+    lon = pop_wtd_lon, lat = pop_wtd_lat,
+    unroutable
+  ) %>%
+  st_set_geometry(NULL)
+
+# Remove Puerto Rico ZCTAs then save to disk
+zcta_geometries_check %>%
+  filter(stringr::str_starts(id, "00", negate = TRUE)) %>%
+  readr::write_csv("input/2010/zcta/pop_wtd_centroids.csv", na = "")

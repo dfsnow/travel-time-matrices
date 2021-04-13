@@ -7,7 +7,7 @@ Routing requires three (plus one optional) data sets within the same directory:
 3. An extract of the OpenStreetMap street network that covers the routing area, saved as an arbitrarily named `.pbf` file
 4. (Optional) Any GTFS feeds that span the routing area, saved as arbitrarily named `.zip` files. Only necessary for transit/multi-modal routing with `r5r`
 
-This directory contains pre-calculated origins (1) and destinations (2) for routing between 2010 Census geographies. Two geographies are included, census tracts and [ZCTAs](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html). Origins and destinations are population-weighted centroids of their respective geographies (based on 2010 census block populations).
+This directory contains pre-calculated origins (1) and destinations (2) for routing between 2010 Census geographies. Two geographies are included, census tracts and [ZCTAs](https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html). Origins and destinations **are population-weighted centroids of their respective geographies** (based on 2010 census block populations).
 
 OSM data (3) and GTFS feeds (4) are not included in this directory and must be downloaded separately, see below.
 
