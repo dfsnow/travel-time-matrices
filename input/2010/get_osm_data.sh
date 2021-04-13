@@ -23,9 +23,12 @@ for county in $(cat county/geoid_list.txt); do
             --overwrite --progress \
             -o "$PWD"/shared/"$county"/"$county".pbf
     fi
-    echo "Done! Symlinking PBF to tracts/ directories..."
+    echo "Done! Symlinking PBF to tracts/ and zcta/ directories..."
     if [ ! -L "$PWD"/tract/resources/"$county"/"$county".pbf ]; then
         ln -s "$PWD"/shared/"$county"/"$county".pbf "$PWD"/tract/resources/"$county"/"$county".pbf
+    fi
+    if [ ! -L "$PWD"/zcta/resources/"$county"/"$county".pbf ]; then
+        ln -s "$PWD"/shared/"$county"/"$county".pbf "$PWD"/zcta/resources/"$county"/"$county".pbf
     fi
 done
 
