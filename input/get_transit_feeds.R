@@ -66,7 +66,7 @@ for (feed_id in unique(unlist(feeds_df$feed_ids))) {
     paste0(stringr::str_replace_all(feed_id, "/", "-"), ".zip")
   )
   if (!file.exists(feed_path)) {
-    download.file(
+    curl::curl_download(
       paste0(
         "https://api.transitfeeds.com/v1/getLatestFeedVersion?key=",
         api_key, "&feed=", feed_id
