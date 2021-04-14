@@ -6,6 +6,9 @@
 *.pbf
 *.zip
 *.json
+*.mapdb
+*.mapdb.p
+*.Rtmp*
 
 resources/
 buffers/
