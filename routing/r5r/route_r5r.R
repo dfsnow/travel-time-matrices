@@ -6,19 +6,26 @@ options(java.parameters = "-Xmx6G")
 
 # Set target county, geography, and env vars
 target_year <- "2010"
-target_county <- "17031"
+target_state <- "01"
 target_geography <- "tract"
-target_path <- glue(
-  "input/{target_year}/{target_geography}/resources/{target_county}"
+target_graph_path <- glue("input/shared/graphs/{target_state}/")
+target_od_path <- glue(
+  "input/{target_year}/{target_geography}/",
+  "origin_destination_by_state/{target_state}/"
 )
 
 # Load origins and destinations from resources/ dir
-origins <- readr::read_csv(glue(target_path, "/origins.csv"))  
-destinations <- readr::read_csv(glue(target_path, "/destinations.csv")) 
+origins <- readr::read_csv(glue(target_od_path, "/origins.csv"))  
+destinations <- readr::read_csv(glue(target_od_path, "/destinations.csv")) 
 
 # Setup routing path and r5 instance
-r5r_core <- setup_r5(data_path = target_path, verbose = TRUE, temp_dir = TRUE)
+r5r_core <- setup_r5(
+  data_path = target_graph_path,
+  verbose = TRUE,
+  temp_dir = TRUE
+)
 
+# Create travel times matrix for transit routing
 start_time <- Sys.time()
 mat <- travel_time_matrix(
   r5r_core = r5r_core,
