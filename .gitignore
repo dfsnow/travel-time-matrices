@@ -4,6 +4,8 @@
 .Renviron
 
 *.pbf
+*.zip
+*.json
 
 resources/
 buffers/
