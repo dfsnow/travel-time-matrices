@@ -1,6 +1,6 @@
 ## Scripts
 
-The scripts in this directory were used to generate the resources included in this repository (for tracts and ZCTAs). Scripts 01-03 do not need to be run and are only included for the sake of reproducibility. Script 04 can be run manually to download the latest GTFS feeds. This is necessary for transit/multi-modal routing.
+The scripts in this directory were used to generate the resources included in this repository (for tracts and ZCTAs). They do not need to be run and are only included for the sake of reproducibility.
 
 ### `01_generate_pop_weighted_centroids.R`
 
@@ -12,10 +12,6 @@ Script to convert `../block/lat_lon_pop.csv.bz2` into population-weighted centro
 4. Convert the resulting population-weighted centroids back to lon/lat
 5. Check that the each population-weighted centroid is inside the polygon boundary of its parent geography, if it is not, set the `unroutable` field to `TRUE` in the output CSV the target geography
 
-### `02_generate_buffer_files.R`
+### `02_create_origin_destination_files.R`
 
-Script to generate the GeoJSON buffer files saved in `../county/buffers.tar.gz`. County boundaries are sourced from the 500k resolution TIGER/Line files (via the [tigris R package](https://cran.r-project.org/web/packages/tigris/index.html)).
-
-### `03_create_origin_destination_files.R`
-
-Script to generate origin and destination CSV files with `id,lat,lon` needed for routing. Files are partitioned by county and saved to their respective geography's `resources/` directory. `origins.csv` contains all geographic units whose population-weighted centroids lie within the county itself. `destinations.csv` contains all geographic units whose population-weighted centroids lie within the county's 100 km buffer.
+Script to generate origin and destination CSV files with `id,lat,lon` needed for routing. Files are partitioned by state and saved to their respective geography's directory. `origins.csv` contains all geographic units whose population-weighted centroids lie within the state itself. `destinations.csv` contains all geographic units whose population-weighted centroids lie within the state's 100 km buffer.
