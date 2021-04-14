@@ -9,6 +9,7 @@
 *.mapdb
 *.mapdb.p
 *.Rtmp*
+*.dat
 
 resources/
 buffers/

@@ -6,7 +6,7 @@ options(java.parameters = "-Xmx6G")
 
 # Set target county, geography, and env vars
 target_year <- "2010"
-target_state <- "01"
+target_state <- "05"
 target_geography <- "tract"
 target_graph_path <- glue("input/shared/graphs/{target_state}/")
 target_od_path <- glue(
@@ -33,11 +33,15 @@ mat <- travel_time_matrix(
   destinations = destinations,
   mode = c("WALK", "TRANSIT"),
   departure_datetime = Sys.time(),
-  time_window = 10,
+  time_window = 1,
   max_walk_dist = Inf,
-  max_trip_duration = 2000,
+  max_trip_duration = 20000,
   max_rides = 5,
   verbose = FALSE
 )
 end_time <- Sys.time()
 runtime <- end_time - start_time
+
+# Print total runtime and close r5r instance
+print(runtime)
+stop_r5(r5r_core)
