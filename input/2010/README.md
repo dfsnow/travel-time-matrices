@@ -17,9 +17,9 @@ Running the scripts in this directory will download all the data necessary for a
 
 1. Clone this repository or download it from GitHub
 2. Navigate to `inputs/2010/` (this directory)
-3. Unpack the included tarballs by running `extract_tarballs.sh`
-3. Download/clip OSM data and save it to the appropriate directories by running `get_osm_data.sh`
-4. (Optional) Download GTFS feeds for each routing area by running `get_transit_feeds.R`
+3. Run `extract_tarballs.sh` to unpack the included tarballs
+3. Run `get_osm_data.sh` to download/clip OSM data and save it to the appropriate directories 
+4. (Optional) Run `get_transit_feeds.R` to download GTFS feeds for each routing area
 
 :warning: **NOTE** :warning: 
 
