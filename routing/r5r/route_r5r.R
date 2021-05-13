@@ -51,8 +51,8 @@ print("Routing matrix finished in :")
 print(runtime)
 
 # Write travel time matrix to csv for later analysis
-out_dir <- glue("output/{target_year}/{target_geography}/travel_time_matrices/{target_state}/{target_mode}")
-if (!dir.exists(out_dir)) dir.create(out_dir, recursive=TRUE)
-write.csv(mat, glue(out_dir, "/ttm.csv"))
+target_ttm_dir <- glue("output/{target_year}/{target_geography}/travel_time_matrices/{target_state}/{target_mode}")
+if (!dir.exists(target_ttm_dir)) dir.create(target_ttm_dir, recursive=TRUE)
+write.csv(mat, glue(target_ttm_dir, "/ttm.csv"))
 
 stop_r5(r5r_core)
