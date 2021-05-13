@@ -6,7 +6,7 @@ library(purrr)
 library(glue)
 
 # Load list of US state FIPS codes, ignore territories and PR
-us_states <- unique(fips_codes$state_code)[1:51]
+us_states <- unique(tigris::fips_codes$state_code)[1:51]
 
 # Load Transit Feeds API key from .Renviron file at root of project directory
 # To get an API key, visit https://transitfeeds.com/api/

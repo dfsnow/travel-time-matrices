@@ -13,9 +13,14 @@ This directory contains pre-calculated origins (1) and destinations (2) for comm
 
 Running the scripts in this directory will download all the data necessary for any mode of routing.
 
+0. Install [Git LFS](https://docs.github.com/en/github/managing-large-files/installing-git-large-file-storage)
+    (To pull individual files, use:
+    `> git lfs checkout path/to/file`)
 1. Clone this repository or download it from GitHub
+2. Install [Osmium](https://osmcode.org/osmium-tool/manual.html)
 3. Run `get_osm_data.sh` to download/clip OSM data and save it to the appropriate directory
 4. (Optional) Run `get_transit_feeds.R` to download GTFS feeds for each routing area
+5. If a network.dat file exists alongside the OSM or GTFS data, r5r will use the .dat file and ignore the new feeds/maps. Deleting the network.dat file will force r5r to incorporate new GTFS or OSM data.
 
 :warning: **NOTE** :warning: 
 
